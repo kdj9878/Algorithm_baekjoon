@@ -34,7 +34,7 @@ public class AlarmClock {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int[] arr = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         boolean miFlag = false;
-        if(arr[1] < 44){
+        if(arr[1] < 45){
             arr[1] = 60 - (45 - arr[1]);
             miFlag = true;
         }
@@ -51,7 +51,7 @@ public class AlarmClock {
             }
         }
 
-        System.out.println(Arrays.toString(arr));
+        System.out.println(arr[0] + " " + arr[1]);
 
     }
 }
