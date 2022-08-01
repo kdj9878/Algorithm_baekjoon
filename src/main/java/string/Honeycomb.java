@@ -16,15 +16,50 @@ public class Honeycomb {
     출력
     입력으로 주어진 방까지 최소 개수의 방을 지나서 갈 때 몇 개의 방을 지나는지 출력한다.*/
 
-    public static void main(String[] args) throws IOException {
+    // 내 풀이(반례를 아직 못 찾음)
+/*    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int goal = Integer.parseInt(br.readLine());
+
+        if(goal == 1){
+            System.out.println(1);
+            return;
+        }
+        int roomCount = 2;
         int count = 1;
-        for(int i = 0; i < goal; i++){
-            if(i % 6 == 0){
-                System.out.println(i);
+        int j = 1;
+        for(int i = 1; i <= goal; i++){
+            if(i >= 2){
+                if(count == (6*j)+1){
+                    count = 1;
+                    roomCount++;
+                    j++;
+                    continue;
+                }
+                count++;
             }
-            count++;
+        }
+
+        System.out.println(roomCount);
+    }*/
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+        int count = 1;
+        int range = 2;
+
+        if (N == 1) {
+            System.out.print(1);
+        }
+
+        else {
+            while (range <= N) {
+                range = range + (6 * count);
+                count++;
+            }
+            System.out.print(count);
         }
     }
 }
