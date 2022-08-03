@@ -1,4 +1,4 @@
-package string;
+package basicMathematics1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
