@@ -38,12 +38,21 @@ public class ACMHotel {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int count = Integer.parseInt(br.readLine());
-
+        // 6 12 10
         for(int i = 0; i < count; i++){
             String[] arr = br.readLine().split(" ");
-            int w = Integer.parseInt(arr[0]);
-            int h = Integer.parseInt(arr[1]);
+            int h = Integer.parseInt(arr[0]);
+            int w = Integer.parseInt(arr[1]);
             int n = Integer.parseInt(arr[2]);
+
+            int mod = n % h;
+            int cha = (int)Math.ceil((double)n / h);
+            if(cha < 10){
+                System.out.printf("%d%02d", mod,cha);
+                return;
+            }
+            System.out.printf("%d%d", mod, cha);
+
 
 
         }
