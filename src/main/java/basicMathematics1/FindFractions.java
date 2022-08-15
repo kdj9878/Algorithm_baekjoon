@@ -3,6 +3,9 @@ package basicMathematics1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FindFractions {
     /*문제
@@ -23,28 +26,55 @@ public class FindFractions {
 
     출력
     첫째 줄에 분수를 출력한다.*/
-
+    static Map<Integer, int[]> map = new HashMap<>();
+    static int count = 1;
+    static int goal;
+    static boolean flag = true;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //int num = Integer.parseInt(br.readLine());
-        int[] arr = {2,3,4,5,6,7,8,9,10};
-//        if(num == 1){
-//            System.out.println("1/1");
-//            return;
-//        }
-
-        for(int i = 0; i < arr.length; i++){
-            int range = 0;
-            int count = 0;
-            while(range < arr[i]){
-                range = range + (range + 1);
-                count++;
+        int num = Integer.parseInt(br.readLine());
+        goal = num;
+        boolean descFlag = true;
+        int i = 2;
+        while(flag){
+            if(descFlag){
+                recursionDesc(i, i-1);
+                descFlag = false;
             }
-            System.out.printf("숫자 : %d\n", arr[i]);
-            System.out.printf("개수 : %d\n",count);
-            System.out.printf("합 : %d\n", count+1);
-            System.out.println("--------------");
+            else{
+                recursionAsc(i, 1);
+                descFlag = true;
+            }
+            i++;
         }
 
+        int[] answer = map.get(num);
+        System.out.println(answer[0] + "/" + answer[1]);
+    }
+
+    public static int recursionDesc(int n, int depth){
+        if(depth == 0){
+            return 0;
+        }
+        map.put(count, new int[]{depth, n - depth});
+        if(count == goal){
+            flag = false;
+            return 0;
+        }
+        count++;
+        return recursionDesc(n, depth - 1);
+    }
+
+    public static int recursionAsc(int n, int depth){
+        if(depth == n){
+            return 0;
+        }
+        map.put(count, new int[]{depth, n - depth});
+        if(count == goal){
+            flag = false;
+            return 0;
+        }
+        count++;
+        return recursionAsc(n, depth + 1);
     }
 }
