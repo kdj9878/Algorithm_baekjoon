@@ -27,54 +27,46 @@ public class FindFractions {
     출력
     첫째 줄에 분수를 출력한다.*/
     static Map<Integer, int[]> map = new HashMap<>();
-    static int count = 1;
-    static int goal;
-    static boolean flag = true;
+    static int count = 0;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int num = Integer.parseInt(br.readLine());
-        goal = num;
-        boolean descFlag = true;
-        int i = 2;
-        while(flag){
-            if(descFlag){
-                recursionDesc(i, i-1);
-                descFlag = false;
-            }
-            else{
-                recursionAsc(i, 1);
-                descFlag = true;
-            }
+
+        int sum = 0;
+        int i = 1;
+        while(sum < num){
+            sum += i;
             i++;
         }
 
-        int[] answer = map.get(num);
-        System.out.println(answer[0] + "/" + answer[1]);
+        int diagonalSum = i; // 대각선 분모, 분자 합
+        int diagonalCount = i-1;  // 대각선 숫자의 개수
+        int diagonal = (sum - diagonalCount) + 1; // 대각선 처음 숫자
+        int diagonalDesc = sum;// 대각선 마지막 숫자
+        int order = 0;
+        System.out.println("대각선 분모, 분자 합 : " + diagonalSum);
+        System.out.printf("대각선 숫자의 개수 : %d\n", diagonalCount);
+        System.out.printf("대각선 처음 숫자 : %d\n",  diagonal);
+        System.out.printf("대각선 마지막 숫자 : %d\n",  diagonalDesc);
+        // 대각선 분모, 분자의 합이 홀수일 경우
+        if(diagonalSum % 2 != 0){
+            order = diagonalDesc - num;
+        }else{
+            order = Math.abs(diagonal - num);
+        }
+        System.out.println("순서 : "+  order);
+        for(int j = 0 ; j <= order; j++){
+            recursion(diagonalSum, 1);
+        }
+        System.out.println(Arrays.toString(map.get(order)));
     }
 
-    public static int recursionDesc(int n, int depth){
+    public static int recursion(int n, int depth){
         if(depth == 0){
             return 0;
         }
         map.put(count, new int[]{depth, n - depth});
-        if(count == goal){
-            flag = false;
-            return 0;
-        }
         count++;
-        return recursionDesc(n, depth - 1);
-    }
-
-    public static int recursionAsc(int n, int depth){
-        if(depth == n){
-            return 0;
-        }
-        map.put(count, new int[]{depth, n - depth});
-        if(count == goal){
-            flag = false;
-            return 0;
-        }
-        count++;
-        return recursionAsc(n, depth + 1);
+        return recursion(n, depth - 1);
     }
 }
