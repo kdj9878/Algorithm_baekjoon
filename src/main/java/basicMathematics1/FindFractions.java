@@ -44,10 +44,6 @@ public class FindFractions {
         int diagonal = (sum - diagonalCount) + 1; // 대각선 처음 숫자
         int diagonalDesc = sum;// 대각선 마지막 숫자
         int order = 0;
-        System.out.println("대각선 분모, 분자 합 : " + diagonalSum);
-        System.out.printf("대각선 숫자의 개수 : %d\n", diagonalCount);
-        System.out.printf("대각선 처음 숫자 : %d\n",  diagonal);
-        System.out.printf("대각선 마지막 숫자 : %d\n",  diagonalDesc);
         // 대각선 분모, 분자의 합이 홀수일 경우
         if(diagonalSum % 2 != 0){
             order = diagonalDesc - num;
@@ -62,11 +58,11 @@ public class FindFractions {
     }
 
     public static int recursion(int n, int depth){
-        if(depth == 0){
+        if(depth == n){
             return 0;
         }
         map.put(count, new int[]{depth, n - depth});
         count++;
-        return recursion(n, depth - 1);
+        return recursion(n, depth + 1);
     }
 }
