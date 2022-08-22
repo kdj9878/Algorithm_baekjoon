@@ -25,28 +25,14 @@ public class Factorization {
         }
 
         int i = 2;
-        while(i <= N){
-            // i가 N의 인수인 경우
-            if(isDecimal(i) && N % i == 0){
+        while(N != 1){
+            if(N % i != 0){
+                i += 1;
+            }
+            else{
+                N /= i;
                 System.out.println(i);
-                N = N / i;
-                i = 2;
-                continue;
-            }
-            i++;
-        }
-    }
-
-    //소수 판별
-    public static boolean isDecimal(int i){
-        if(i == 2){
-            return true;
-        }
-        for(int j = 3; j < Math.sqrt(i); j++){
-            if(i % j == 0){
-                return false;
             }
         }
-        return true;
     }
 }
