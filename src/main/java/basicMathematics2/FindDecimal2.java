@@ -1,6 +1,7 @@
 package basicMathematics2;
 
 import java.io.*;
+import java.util.Map;
 
 
 public class FindDecimal2 {
@@ -13,7 +14,8 @@ public class FindDecimal2 {
 
     출력
     한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.*/
-
+    static boolean[] prime;
+    static Map<Integer, Boolean> map;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -21,22 +23,45 @@ public class FindDecimal2 {
         int M = Integer.parseInt(arr[0]);
         int N = Integer.parseInt(arr[1]);
 
-        for(int i = M; i <= N; i++){
-            if(isDecimal(i)){
-                bw.write(i + "\n");
+        init(M, N);
+        findDecimal(M, N);
+
+        for(int i = 0; i < prime.length; i++){
+            if(prime[i] == false){
+                System.out.println(i+M);
             }
         }
+
         br.close();
         bw.flush();
         bw.close();
     }
 
-    public static boolean isDecimal(int n){
-        for(int j = 2; j <= n/2; j++){
-            if(n % j == 0){
-                return false;
+    static void init(int m, int n){
+        for(int i = m; i <= n; i++) map.put(i, false);
+    }
+
+    public static void findDecimal(int m, int n){
+
+        for(int i = m; i <= n; i++){
+            if(i == 1){
+                map.put(1, true);
+                continue;
+            }
+            else if(i == 2){
+                continue;
+            }
+            for(int j = 0; j <= Math.sqrt(n); j++){
+                if(map.get(j) == true){
+                    continue;
+                }
+
+                for(int p = j*j; p < prime.length; p++){
+                    prime[p] = true;
+                }
             }
         }
-        return true;
+
+
     }
 }
