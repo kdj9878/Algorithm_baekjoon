@@ -15,7 +15,7 @@ public class FindDecimal2 {
 
     출력
     한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.*/
-    static Map<Integer, Boolean> map = new HashMap<>();
+    static boolean[] prime;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -23,12 +23,12 @@ public class FindDecimal2 {
         int M = Integer.parseInt(arr[0]);
         int N = Integer.parseInt(arr[1]);
 
-        init(M, N);
-        findDecimal(M, N);
+        init(N);
+        findDecimal();
 
-        for(Map.Entry<Integer, Boolean> entry : map.entrySet()){
-            if(entry.getValue() == false){
-                bw.write(entry.getKey() + "\n");
+        for(int i = M; i <= N; i++){
+            if(!prime[i]){
+                bw.write(i + "\n");
             }
         }
 
@@ -37,25 +37,17 @@ public class FindDecimal2 {
         bw.close();
     }
 
-    static void init(int m, int n){
-        for(int i = m; i <= n; i++) {
-            map.put(i, false);
-        }
+    static void init(int n){
+        prime = new boolean[n+1];
     }
 
-    public static void findDecimal(int m, int n){
-        for(int i = m; i <= n; i++){
-            if(i == 1){
-                map.put(1, true);
-                continue;
-            }
+    public static void findDecimal(){
+        prime[0] = prime[1] = true;
 
-            if(map.get(i) == true){
-                continue;
-            }
-
-            for(int p = 2*i; p <= n; p += i){
-                map.put(p, true);
+        for(int i = 2; i <= Math.sqrt(prime.length); i++) {
+            if(prime[i]) continue;
+            for(int j = i * i; j < prime.length; j += i) {
+                prime[j] = true;
             }
         }
     }
