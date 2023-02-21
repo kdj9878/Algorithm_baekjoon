@@ -15,6 +15,7 @@ public class ChibiJeonmin {
         while(st.hasMoreTokens()){
             answer += Long.parseLong(st.nextToken());
         }
+        br.close();
         System.out.println(answer);
     }
 }
