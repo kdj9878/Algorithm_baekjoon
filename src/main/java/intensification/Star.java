@@ -15,15 +15,23 @@ public class Star {
      *
      */
 
-    /**
-     * 내 풀이
-     * @param args
-     * @throws IOException
-     */
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuffer sb = new StringBuffer();
         int N = Integer.parseInt(br.readLine());
+
+        System.out.println(mine(N));
+        System.out.println("---------------");
+        System.out.println(other(N));
+
+    }
+
+    /**
+     * 내 풀이
+     * @param N
+     */
+    private static String mine(int N) {
+        StringBuffer sb = new StringBuffer();
 
         int len = N;
         int star = 1;
@@ -47,37 +55,25 @@ public class Star {
         for(int i = strArr.length-2; i >= 0; i--){
             sb.append(strArr[i] + "\n");
         }
-
-        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     /**
      * 다른 사람의 신기한 풀이
      * @throws IOException
      */
-    public void main2() throws IOException{
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(in.readLine());
+    private static String other(int n) {
+        StringBuffer sb = new StringBuffer();
 
         for (int i = 1; i <= 2 * n +1; i++) { //몇줄 쓸꺼야?
-
-
             for(int j = 0; j<(n-i)+((i)/n)*(-(n-i)+((i)%n)); j++) {//빈칸 몇개? 4321 0(n) 1234 //n까지 0 n위 부터1 (j/n) //
-
-                System.out.print(" ");
-
+                sb.append(" ");
             }
-
             for(int j = 0; j<(2*i-1)+((i)/n)*(-(2*i-1)+2*(n-i%n)-1); j++) {//별 몇개? 1357 9(n) 7531
-
-                System.out.print("*");
-
+                sb.append("*");
             }
-
-            System.out.println();
-
+            sb.append("\n");
         }
-
-        in.close();
+        return sb.toString();
     }
 }
