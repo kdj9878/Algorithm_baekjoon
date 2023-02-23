@@ -15,6 +15,11 @@ public class Star {
      *
      */
 
+    /**
+     * 내 풀이
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuffer sb = new StringBuffer();
@@ -44,5 +49,35 @@ public class Star {
         }
 
         System.out.println(sb.toString());
+    }
+
+    /**
+     * 다른 사람의 신기한 풀이
+     * @throws IOException
+     */
+    public void main2() throws IOException{
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(in.readLine());
+
+        for (int i = 1; i <= 2 * n +1; i++) { //몇줄 쓸꺼야?
+
+
+            for(int j = 0; j<(n-i)+((i)/n)*(-(n-i)+((i)%n)); j++) {//빈칸 몇개? 4321 0(n) 1234 //n까지 0 n위 부터1 (j/n) //
+
+                System.out.print(" ");
+
+            }
+
+            for(int j = 0; j<(2*i-1)+((i)/n)*(-(2*i-1)+2*(n-i%n)-1); j++) {//별 몇개? 1357 9(n) 7531
+
+                System.out.print("*");
+
+            }
+
+            System.out.println();
+
+        }
+
+        in.close();
     }
 }
